@@ -21,13 +21,27 @@ def get_contestant_name(data, occupation)
 end
 
 def count_contestants_by_hometown(data, hometown)
-  # code here
+  res= data.reduce([]) do |acc, season|
+    matches=season[1].select{|y| y['hometown']==hometown}
+    acc+matches
+  end
+  res.length
 end
 
 def get_occupation(data, hometown)
-  # code here
+  res= data.reduce([]) do |acc, season|
+    matches=season[1].select{|y| y['hometown']==hometown}
+    occs=matches.map{|z| z['occupation']}
+    acc+occs
+  end
+  res.first
 end
 
 def get_average_age_for_season(data, season)
-  # code here
+  cson=data.select{|k,v| k==season}
+  yrs=cson.reduce([]) do |acc, per|
+    acc+per[1].map{|x| x['age'].to_f}
+  end
+  debugger
+  (yrs.reduce(0.0){|acc, dig| acc+dig} / yrs.length.to_f).round
 end
