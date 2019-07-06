@@ -42,6 +42,5 @@ def get_average_age_for_season(data, season)
   yrs=cson.reduce([]) do |acc, per|
     acc+per[1].map{|x| x['age'].to_f}
   end
-  debugger
   (yrs.reduce(0.0){|acc, dig| acc+dig} / yrs.length.to_f).round
 end
